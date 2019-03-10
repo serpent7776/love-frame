@@ -1,5 +1,6 @@
 local W, H
 local music
+local sounds
 local viewport_width
 local viewport_height
 
@@ -19,9 +20,20 @@ local function preload_music(dir)
 	end
 end
 
+local function preload_sounds(dir)
+	sounds = {}
+	local sounds_dir = dir .. '/sounds'
+	local files = love.filesystem.getDirectoryItems(sounds_dir)
+	for _, file in pairs(files) do
+		local path = sounds_dir .. '/' .. file
+		sounds[file] = love.audio.newSource(path, 'static')
+	end
+end
+
 local function preload_assets()
 	local dir = 'assets/preload'
 	preload_music(dir)
+	preload_sounds(dir)
 end
 
 function lf.setup_viewport(width, height)
@@ -31,6 +43,10 @@ end
 
 function lf.get_music(file_name)
 	return music[file_name]
+end
+
+function lf.get_sound(file_name)
+	return sounds[file_name]
 end
 
 function love.load()
