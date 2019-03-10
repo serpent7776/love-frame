@@ -4,6 +4,8 @@ local sounds
 local textures
 local viewport_width
 local viewport_height
+local time_step
+local time_acc
 
 local lf = {
 	_VERSION = '0.1.0',
@@ -69,12 +71,18 @@ function love.load()
 	W, H = love.graphics.getPixelDimensions()
 	viewport_width = 0
 	viewport_height = 0
+	time_step = 1 / 50
+	time_acc = 0
 	preload_assets()
 	lf.init()
 end
 
 function love.update(dt)
-	lf.update(dt)
+	time_acc = time_acc + dt
+	while time_acc >= time_step do
+		time_acc = time_acc - time_step
+		lf.update(time_step)
+	end
 end
 
 function love.draw()
