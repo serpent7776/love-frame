@@ -1,10 +1,10 @@
 local W, H
 local music
+local viewport_width
+local viewport_height
 
 local lf = {
 	_VERSION = '0.1.0',
-	viewport_width = 0,
-	viewport_height = 0,
 }
 
 local function preload_music(dir)
@@ -25,8 +25,8 @@ local function preload_assets()
 end
 
 function lf.setup_viewport(width, height)
-	lf.viewport_width = width
-	lf.viewport_height = height
+	viewport_width = width
+	viewport_height = height
 end
 
 function lf.get_music(file_name)
@@ -35,6 +35,8 @@ end
 
 function love.load()
 	W, H = love.graphics.getPixelDimensions()
+	viewport_width = 0
+	viewport_height = 0
 	preload_assets()
 	lf.init()
 end
@@ -45,7 +47,7 @@ end
 
 function love.draw()
 	-- setup viewport
-	love.graphics.scale(W / lf.viewport_width, H / lf.viewport_width)
+	love.graphics.scale(W / viewport_width, H / viewport_width)
 	-- do actual drawing
 	lf.draw()
 end
