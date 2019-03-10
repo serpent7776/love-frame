@@ -1,6 +1,7 @@
 local W, H
 local music
 local sounds
+local textures
 local viewport_width
 local viewport_height
 
@@ -30,10 +31,21 @@ local function preload_sounds(dir)
 	end
 end
 
+local function preload_textures(dir)
+	textures = {}
+	local textures_dir = dir .. '/gfx'
+	local files = love.filesystem.getDirectoryItems(textures_dir)
+	for _, file in pairs(files) do
+		local path = textures_dir .. '/' .. file
+		textures[file] = love.graphics.newImage(path)
+	end
+end
+
 local function preload_assets()
 	local dir = 'assets/preload'
 	preload_music(dir)
 	preload_sounds(dir)
+	preload_textures(dir)
 end
 
 function lf.setup_viewport(width, height)
@@ -47,6 +59,10 @@ end
 
 function lf.get_sound(file_name)
 	return sounds[file_name]
+end
+
+function lf.get_texture(file_name)
+	return textures[file_name]
 end
 
 function love.load()
