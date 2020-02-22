@@ -87,7 +87,7 @@ end
 
 function love.draw()
 	-- setup viewport
-	love.graphics.scale(W / viewport_width, H / viewport_width)
+	love.graphics.scale(W / viewport_width, H / viewport_height)
 	-- do actual drawing
 	lf.draw()
 end
