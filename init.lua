@@ -69,8 +69,8 @@ end
 
 function love.load()
 	W, H = love.graphics.getDimensions()
-	viewport_width = 0
-	viewport_height = 0
+	viewport_width = W
+	viewport_height = H
 	time_step = 1 / 50
 	time_acc = 0
 	preload_assets()
