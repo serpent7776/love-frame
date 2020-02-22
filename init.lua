@@ -68,7 +68,7 @@ function lf.get_texture(file_name)
 end
 
 function love.load()
-	W, H = love.graphics.getPixelDimensions()
+	W, H = love.graphics.getDimensions()
 	viewport_width = 0
 	viewport_height = 0
 	time_step = 1 / 50
