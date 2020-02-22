@@ -72,7 +72,7 @@ function love.load()
 	viewport_width = W
 	viewport_height = H
 	time_step = 1 / 50
-	time_acc = 0
+	time_acc = time_step
 	preload_assets()
 	lf.init()
 end
