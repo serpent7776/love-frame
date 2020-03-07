@@ -1,4 +1,4 @@
-local W, H
+local window_width, window_height
 local music
 local sounds
 local textures
@@ -68,9 +68,9 @@ function lf.get_texture(file_name)
 end
 
 function love.load()
-	W, H = love.graphics.getDimensions()
-	viewport_width = W
-	viewport_height = H
+	window_width, window_height = love.graphics.getDimensions()
+	viewport_width = window_width
+	viewport_height = window_height
 	time_step = 1 / 50
 	time_acc = time_step
 	preload_assets()
@@ -87,7 +87,7 @@ end
 
 function love.draw()
 	-- setup viewport
-	love.graphics.scale(W / viewport_width, H / viewport_height)
+	love.graphics.scale(window_width / viewport_width, window_height / viewport_height)
 	-- do actual drawing
 	lf.draw()
 end
