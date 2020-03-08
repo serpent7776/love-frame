@@ -1,3 +1,4 @@
+local initial_window_width, initial_window_height
 local window_width, window_height
 local music
 local sounds
@@ -55,6 +56,15 @@ function lf.setup_viewport(width, height)
 	viewport_height = height
 end
 
+function lf.toggle_fullscreen()
+	local switching_to_windowed = love.window.getFullscreen()
+	local switching_to_fullscreen = not switching_to_fullscreen
+	love.window.setFullscreen(switching_to_fullscreen, 'desktop')
+	if switching_to_windowed then
+		love.window.setMode(initial_window_width, initial_window_height)
+	end
+end
+
 function lf.get_music(file_name)
 	return music[file_name]
 end
@@ -68,7 +78,9 @@ function lf.get_texture(file_name)
 end
 
 function love.load()
-	window_width, window_height = love.graphics.getDimensions()
+	initial_window_width, initial_window_height = love.graphics.getDimensions()
+	window_width = initial_window_width
+	window_height = initial_window_height
 	viewport_width = window_width
 	viewport_height = window_height
 	time_step = 1 / 50
@@ -80,6 +92,9 @@ end
 function love.resize(w, h)
 	window_width = w
 	window_height = h
+	if lf.resize then
+		lf.resize(w, h)
+	end
 end
 
 function love.update(dt)
