@@ -77,6 +77,11 @@ function love.load()
 	lf.init()
 end
 
+function love.resize(w, h)
+	window_width = w
+	window_height = h
+end
+
 function love.update(dt)
 	time_acc = time_acc + dt
 	while time_acc >= time_step do
