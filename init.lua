@@ -62,6 +62,8 @@ function lf.toggle_fullscreen()
 	love.window.setFullscreen(switching_to_fullscreen, 'desktop')
 	if switching_to_windowed then
 		love.window.setMode(initial_window_width, initial_window_height)
+		window_width = initial_window_width
+		window_height = initial_window_height
 	end
 end
 
