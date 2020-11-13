@@ -1,6 +1,6 @@
 local initial_window_width, initial_window_height
 local window_width, window_height
-local music
+local music, current_music
 local sounds
 local textures
 local viewport_width
@@ -104,6 +104,21 @@ end
 
 function lf.get_texture(file_name)
 	return textures[file_name]
+end
+
+function lf.play_music(file_name)
+	if current_music then
+		current_music:stop()
+	end
+	current_music = music[file_name]
+	current_music:play()
+	return current_music
+end
+
+function lf.stop_music()
+	if current_music then
+		current_music:stop()
+	end
 end
 
 function love.load()
