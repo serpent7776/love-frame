@@ -121,6 +121,12 @@ function lf.stop_music()
 	end
 end
 
+function lf.play_sound(file_name)
+	sound = sounds[file_name]
+	sound:play()
+	return sound
+end
+
 function love.load()
 	initial_window_width, initial_window_height = love.graphics.getDimensions()
 	window_width = initial_window_width
