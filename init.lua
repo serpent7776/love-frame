@@ -12,7 +12,7 @@ local prefs
 local max_vol = 100
 
 local lf = {
-	_VERSION = '0.2.0',
+	_VERSION = '0.2.1',
 }
 
 local function default_prefs()
