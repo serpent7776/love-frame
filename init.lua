@@ -122,7 +122,7 @@ function lf.stop_music()
 end
 
 function lf.play_sound(file_name)
-	sound = sounds[file_name]
+	local sound = sounds[file_name]
 	sound:play()
 	return sound
 end
