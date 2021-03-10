@@ -8,11 +8,20 @@ local viewport_height
 local time_step
 local time_acc
 local prefs
+local screens = {}
+local current_screen
 
 local max_vol = 100
 
 local lf = {
-	_VERSION = '0.2.1',
+	_VERSION = '0.3.0',
+}
+
+local empty_screen = {
+	update = function(_)
+	end,
+	draw = function()
+	end,
 }
 
 local function default_prefs()
@@ -127,6 +136,26 @@ function lf.play_sound(file_name)
 	return sound
 end
 
+function lf.screens()
+	return screens
+end
+
+function lf.current_screen()
+	return current_screen
+end
+
+function lf.add_screen(name, screen)
+	screens[name] = screen
+end
+
+function lf.switch_to(new_scene)
+	if current_screen.hide then
+		current_screen.hide()
+	end
+	current_screen = new_scene
+	current_screen.show()
+end
+
 function love.load()
 	initial_window_width, initial_window_height = love.graphics.getDimensions()
 	window_width = initial_window_width
@@ -138,6 +167,7 @@ function love.load()
 	prefs = default_prefs()
 	read_prefs()
 	preload_assets()
+	current_screen = empty_screen
 	lf.init()
 end
 
