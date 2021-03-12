@@ -8,6 +8,7 @@ local viewport_height
 local time_step
 local time_acc
 local prefs
+local data = {}
 local screens = {}
 local current_screen
 
@@ -154,6 +155,11 @@ function lf.switch_to(new_scene)
 	end
 	current_screen = new_scene
 	current_screen.show()
+end
+
+function lf.data(new_data)
+	data = new_data or data
+	return data
 end
 
 function love.load()
