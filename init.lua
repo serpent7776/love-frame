@@ -149,12 +149,20 @@ function lf.add_screen(name, screen)
 	screens[name] = screen
 end
 
+function lf.load_screen(name, path)
+	local m = require(path)
+	m.load()
+	lf.add_screen(name, m)
+end
+
 function lf.switch_to(new_scene)
 	if current_screen.hide then
 		current_screen.hide()
 	end
 	current_screen = new_scene
-	current_screen.show()
+	if current_screen.show then
+		current_screen.show()
+	end
 end
 
 function lf.data(new_data)
