@@ -1,3 +1,6 @@
+local path = ...
+local scale = require(path .. '/scaling')
+
 local initial_window_width, initial_window_height
 local window_width, window_height
 local music, current_music
@@ -5,6 +8,7 @@ local sounds
 local textures
 local viewport_width
 local viewport_height
+local viewport_scaling
 local time_step
 local time_acc
 local prefs
@@ -88,9 +92,10 @@ local function preload_assets()
 	preload_textures(dir)
 end
 
-function lf.setup_viewport(width, height)
+function lf.setup_viewport(width, height, scaling)
 	viewport_width = width
 	viewport_height = height
+	viewport_scaling = scaling or scale.fit
 end
 
 function lf.toggle_fullscreen()
@@ -203,7 +208,8 @@ end
 
 function love.draw()
 	-- setup viewport
-	love.graphics.scale(window_width / viewport_width, window_height / viewport_height)
+	local sx, sy = viewport_scaling(viewport_width, viewport_height, window_width, window_height)
+	love.graphics.scale(sx, sy)
 	-- do actual drawing
 	lf.draw()
 end
