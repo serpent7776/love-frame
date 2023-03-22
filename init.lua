@@ -1,5 +1,4 @@
-local path = ...
-local scale = require(path .. '/scaling')
+local scale = require((...) .. '/scaling')
 
 local initial_window_width, initial_window_height
 local window_width, window_height
