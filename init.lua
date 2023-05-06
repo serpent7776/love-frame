@@ -7,7 +7,7 @@ local sounds
 local textures
 local viewport_width
 local viewport_height
-local viewport_scaling
+local viewport_scaling = scale.fit
 local time_step
 local time_acc
 local prefs
