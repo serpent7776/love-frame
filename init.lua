@@ -10,6 +10,7 @@ local viewport_height
 local viewport_scaling = scale.fit
 local time_step
 local time_acc
+local game_time
 local prefs
 local data = {}
 local screens = {}
@@ -174,6 +175,10 @@ function lf.data(new_data)
 	return data
 end
 
+function lf.game_time()
+	return game_time
+end
+
 function love.load()
 	initial_window_width, initial_window_height = love.graphics.getDimensions()
 	window_width = initial_window_width
@@ -182,6 +187,7 @@ function love.load()
 	viewport_height = window_height
 	time_step = 1 / 50
 	time_acc = time_step
+	game_time = 0
 	prefs = default_prefs()
 	read_prefs()
 	preload_assets()
@@ -198,6 +204,7 @@ function love.resize(w, h)
 end
 
 function love.update(dt)
+	game_time = game_time + dt
 	time_acc = time_acc + dt
 	while time_acc >= time_step do
 		time_acc = time_acc - time_step
