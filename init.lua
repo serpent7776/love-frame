@@ -121,6 +121,10 @@ function lf.get_texture(file_name)
 	return textures[file_name]
 end
 
+function lf.load_font(file_name, font_size)
+	return love.graphics.newFont('assets/fonts/' .. file_name, font_size)
+end
+
 function lf.play_music(file_name)
 	if current_music then
 		current_music:stop()
