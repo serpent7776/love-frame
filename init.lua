@@ -104,9 +104,7 @@ function lf.toggle_fullscreen()
 	local switching_to_fullscreen = not switching_to_windowed
 	love.window.setFullscreen(switching_to_fullscreen, 'desktop')
 	if switching_to_windowed then
-		love.window.setMode(initial_window_width, initial_window_height)
-		window_width = initial_window_width
-		window_height = initial_window_height
+		love.window.updateMode(initial_window_width, initial_window_height)
 	end
 end
 
@@ -219,11 +217,21 @@ end
 
 function love.draw()
 	tween.alpha = time_acc / time_step
-	-- setup viewport
+	-- not every resize triggers love.resize (setMode, some window managers), so check here too
+	local w, h = love.graphics.getDimensions()
+	if w ~= window_width or h ~= window_height then
+		love.resize(w, h)
+	end
+	-- setup viewport: scaled to the window and centred in it, with anything drawn outside clipped
 	local sx, sy = viewport_scaling(viewport_width, viewport_height, window_width, window_height)
+	local vw, vh = viewport_width * sx, viewport_height * sy
+	local ox, oy = math.floor((window_width - vw) / 2), math.floor((window_height - vh) / 2)
+	love.graphics.setScissor(ox, oy, math.ceil(vw), math.ceil(vh))
+	love.graphics.translate(ox, oy)
 	love.graphics.scale(sx, sy)
 	-- do actual drawing
 	lf.draw()
+	love.graphics.setScissor()
 end
 
 return lf
