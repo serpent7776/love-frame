@@ -1,4 +1,5 @@
 local scale = require((...) .. '/scaling')
+local tween = require((...) .. '/tween')
 
 local initial_window_width, initial_window_height
 local window_width, window_height
@@ -217,6 +218,7 @@ function love.update(dt)
 end
 
 function love.draw()
+	tween.alpha = time_acc / time_step
 	-- setup viewport
 	local sx, sy = viewport_scaling(viewport_width, viewport_height, window_width, window_height)
 	love.graphics.scale(sx, sy)
