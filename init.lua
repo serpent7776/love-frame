@@ -4,6 +4,7 @@ local tween = require((...) .. '/tween')
 local initial_window_width, initial_window_height
 local window_width, window_height
 local music, current_music
+local music_was_playing = false
 local sounds
 local textures
 local viewport_width
@@ -129,6 +130,7 @@ function lf.play_music(file_name)
 		current_music:stop()
 	end
 	current_music = music[file_name]
+	music_was_playing = false
 	current_music:play()
 	return current_music
 end
@@ -137,6 +139,22 @@ function lf.stop_music()
 	if current_music then
 		current_music:stop()
 	end
+	music_was_playing = false
+end
+
+function lf.pause_music()
+	music_was_playing = current_music ~= nil and current_music:isPlaying()
+	if music_was_playing then
+		current_music:pause()
+	end
+end
+
+-- only resumes a track that was still playing when paused: play() on a finished one would restart it from 0
+function lf.resume_music()
+	if music_was_playing then
+		current_music:play()
+	end
+	music_was_playing = false
 end
 
 function lf.play_sound(file_name)
