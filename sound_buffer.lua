@@ -17,7 +17,7 @@ function buffer.new(size, sound)
 			local s = sounds[current]
 			s:stop()
 			s:play()
-			current = (current + 1) % size + 1
+			current = current % size + 1
 			return s
 		end,
 	}
