@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.6.0 - 2026-10-26
 
 ### Added
 - `pause_music` and `resume_music`. `resume_music` only resumes a track that was still playing

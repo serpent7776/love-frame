@@ -21,7 +21,7 @@ local current_screen
 local max_vol = 100
 
 local lf = {
-	_VERSION = '0.5.0',
+	_VERSION = '0.6.0',
 }
 
 local empty_screen = {
