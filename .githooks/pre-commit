@@ -1,0 +1,3 @@
+#!/bin/sh
+# Refuse the commit if luacheck finds anything. Skip with `git commit --no-verify`.
+exec luacheck .
