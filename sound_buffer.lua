@@ -14,11 +14,11 @@ function buffer.new(size, sound)
 	local current = 1
 	return {
 		play_next = function()
-			local sound = sounds[current]
-			sound:stop()
-			sound:play()
+			local s = sounds[current]
+			s:stop()
+			s:play()
 			current = (current + 1) % size + 1
-			return sound
+			return s
 		end,
 	}
 end
